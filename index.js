@@ -55,6 +55,14 @@ mcpServer.registerTool(
 );
 
 app.post("/mcp", async (req, res) => {
+  const secret = process.env.MCP_SECRET;
+
+  if (!secret || req.query.key !== secret) {
+    return res.status(401).json({
+      error: "Unauthorized"
+    });
+  }
+
   try {
     const transport = new StreamableHTTPServerTransport({
       sessionIdGenerator: undefined
