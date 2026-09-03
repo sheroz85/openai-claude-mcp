@@ -45,7 +45,7 @@ mcpServer.registerTool(
         content: [
           {
             type: "text",
-            text: `OpenAI error: ${error.message}`
+            text: OpenAI error: ${error.message}
           }
         ],
         isError: true
@@ -56,13 +56,13 @@ mcpServer.registerTool(
 
 app.post("/mcp", async (req, res) => {
   const secret = process.env.MCP_SECRET;
-const auth = req.headers.authorization;
+  const auth = req.headers.authorization;
 
-if (!secret || auth !== `Bearer ${secret}`) {
-  return res.status(401).json({
-    error: "Unauthorized"
-  });
-}
+  if (!secret || auth !== Bearer ${secret}) {
+    return res.status(401).json({
+      error: "Unauthorized"
+    });
+  }
 
   try {
     const transport = new StreamableHTTPServerTransport({
@@ -89,5 +89,5 @@ app.get("/health", (req, res) => {
 const port = Number(process.env.PORT) || 3000;
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`OpenAI MCP server running on port ${port}`);
+  console.log(OpenAI MCP server running on port ${port});
 });
